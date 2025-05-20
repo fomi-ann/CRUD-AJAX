@@ -20,7 +20,7 @@ namespace CRUD_AJAX.Controllers
 
         [HttpGet]
 
-        public IActionResult Details()
+        public IActionResult Create()
         {
             Country country = new Country();
             return View(country);
@@ -43,9 +43,9 @@ namespace CRUD_AJAX.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int Id)
         {
-            Country country = GetCountry(id);
+            Country country = GetCountry(Id);
             return View(country);
         }
 
