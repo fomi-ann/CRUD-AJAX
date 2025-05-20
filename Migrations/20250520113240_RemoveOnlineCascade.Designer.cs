@@ -3,6 +3,7 @@ using CRUD_AJAX.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRUD_AJAX.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250520113240_RemoveOnlineCascade")]
+    partial class RemoveOnlineCascade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,44 +79,6 @@ namespace CRUD_AJAX.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("CRUD_AJAX.Models.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EmailId")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(75)
-                        .HasColumnType("nvarchar(75)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(75)
-                        .HasColumnType("nvarchar(75)");
-
-                    b.Property<string>("PhotoUrl")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("Customer");
-                });
-
             modelBuilder.Entity("CRUD_AJAX.Models.City", b =>
                 {
                     b.HasOne("CRUD_AJAX.Models.Country", "Country")
@@ -123,17 +88,6 @@ namespace CRUD_AJAX.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("CRUD_AJAX.Models.Customer", b =>
-                {
-                    b.HasOne("CRUD_AJAX.Models.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("City");
                 });
 #pragma warning restore 612, 618
         }
