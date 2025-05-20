@@ -13,6 +13,9 @@ namespace CRUD_AJAX.Models
 
         [Required]
         [MaxLength(75)]
+        public string Name { get; set; }
+
+        [MaxLength(75)]
         public string CurrencyName { get; set; } = "";
     }
 }
